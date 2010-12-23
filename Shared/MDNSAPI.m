@@ -3,12 +3,13 @@
 //  MobileMDNS
 //
 //  Created by Patrick Quinn-Graham on 10-06-19.
-//  Copyright 2010 Sharkey Media. All rights reserved.
+//  Copyright 2010 Patrick Quinn-Graham. All rights reserved.
 //
 
 #import "MDNSAPIDelegate.h"
 #import "MDNSAPI.h"
 #import "CJSONDeserializer.h"
+#import "MDNSKey.h"
 
 
 #define MDNSAPIRoot @"http://dns.m.ac.nz/dnsconfig/api/"
@@ -28,24 +29,25 @@
 @synthesize delegate, apiKey;
 
 +api {
-	return [[[MDNSAPI alloc] initWithAPIKey:@"~APIKEYGOESHERE~"] autorelease];
+	return [[[MDNSAPI alloc] initWithAPIKey:MDNS_API_KEY] autorelease];
 }
 
 +(void)startNetworkActivity {
 	NSLog(@"startNetworkActivity!");
-	//[[UIApplication sharedApplication] performSelectorOnMainThread:@selector(setNetworkActivityIndicatorVisible:) withObject:[NSNumber numberWithBool:YES] waitUntilDone:YES];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSLog(@"no, really, startNetworkActivity!");
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+	});
 }
 
 +(void)stopNetworkActivity {
 	NSLog(@"stopNetworkActivity!");
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSLog(@"no, really, stopNetworkActivity!");
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	});
 	[self performSelectorOnMainThread:@selector(stopNetworkActivityMain) withObject:nil waitUntilDone:YES];
 }
-
-+(void)stopNetworkActivityMain {
-	NSLog(@"no, really, stopNetworkActivity!");
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
 
 -initWithAPIKey:(NSString*)key {
 	if((self = [super init])) {
@@ -62,35 +64,20 @@
 
 -(void)fetchDomains {
 	dispatch_async(queue, ^{
-		NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 		[MDNSAPI startNetworkActivity];
 		
 		NSDictionary *domains = [self apiGetToMethod:@"domain/all" withParams:@""];
-		[self performSelectorOnMainThread:@selector(fetchDomainsComplete:) withObject:domains waitUntilDone:YES];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if([[domains objectForKey:@"status"] isEqualToString:@"ok"]) {
+				[delegate mdnsapi:self didFetchDomains:[domains objectForKey:@"domains"]];
+			} else {
+				[delegate mdnsapi:self didFetchDomains:nil];
+			}
+		});
 				
 		[MDNSAPI stopNetworkActivity];
-		[pool release];
 	});
-//	[self performSelectorInBackground:@selector(fetchDomainsInBackground) withObject:nil];
-}
-
--(void)fetchDomainsInBackground {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	[MDNSAPI startNetworkActivity];
-	
-	NSArray *domains = [self apiGetToMethod:@"domain/all" withParams:@""];
-	[self performSelectorOnMainThread:@selector(fetchDomainsComplete:) withObject:domains waitUntilDone:YES];
-	
-	[MDNSAPI stopNetworkActivity];
-    [pool release];
-}
-
--(void)fetchDomainsComplete:(NSDictionary*)domains {
-	if([[domains objectForKey:@"status"] isEqualToString:@"ok"]) {
-		[delegate mdnsapi:self didFetchDomains:[domains objectForKey:@"domains"]];
-	} else {
-		[delegate mdnsapi:self didFetchDomains:nil];
-	}
 }
 
 -(void)fetchDomain:(NSString*)domainID {
@@ -99,11 +86,14 @@
 		[MDNSAPI startNetworkActivity];
 		
 		NSDictionary *domain = [self apiGetToMethod:@"domain/get" withParams:[@"id=" stringByAppendingString:domainID]];
-		[self performSelectorOnMainThread:@selector(fetchDomainComplete:) withObject:domain waitUntilDone:NO];
-
+		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			NSLog(@"Done! %@", self->delegate);
-			//[self->delegate mdnsapi:self didFetchDomain:domain];
+			if([[domain objectForKey:@"status"] isEqualToString:@"ok"]) {
+				[delegate mdnsapi:self didFetchDomain:domain];
+			} else {
+				[delegate mdnsapi:self didFetchDomain:nil];
+			}
 		});
 		
 		[MDNSAPI stopNetworkActivity];
@@ -111,15 +101,7 @@
 	});
 }
 
--(void)fetchDomainComplete:(NSDictionary*)domain {
-	if([[domain objectForKey:@"status"] isEqualToString:@"ok"]) {
-		[delegate mdnsapi:self didFetchDomain:domain];
-	} else {
-		[delegate mdnsapi:self didFetchDomain:nil];
-	}
-}
-
--(void)saveDomainRecord:(NSDictionary*)record withCallback:(void (^)(BOOL, NSString*))callback {
+-(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback {
     dispatch_async(queue, ^{
         [MDNSAPI startNetworkActivity];
         NSDictionary *result = (NSDictionary*)[self apiPostToMethod:@"record/modify" withParams:@""];

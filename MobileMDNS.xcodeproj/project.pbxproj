@@ -60,6 +60,7 @@
 		8D1107310486CEB800E47090 /* MobileMDNS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MobileMDNS-Info.plist"; path = "../MobileMDNS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		CD00BF9312C304C8002DC3E9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CD00BF9412C304C8002DC3E9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		CD23B0C012C3671D00AD071D /* MDNSKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDNSKey.h; sourceTree = "<group>"; };
 		CD437C8611CC658B005BB704 /* DomainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainListViewController.h; sourceTree = "<group>"; };
 		CD437C8711CC658B005BB704 /* DomainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainListViewController.m; sourceTree = "<group>"; };
 		CD437CC011CC6B58005BB704 /* DomainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainViewController.h; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 				CD4A92A9122A6792001C48B4 /* TextFieldCell.h */,
 				CD4A92AA122A6792001C48B4 /* TextFieldCell.m */,
 				CD4A92FB122A7032001C48B4 /* MDNSModalDelegate.h */,
+				CD23B0C012C3671D00AD071D /* MDNSKey.h */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
