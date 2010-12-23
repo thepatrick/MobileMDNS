@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2860E328111B887F00E27156 /* AppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E326111B887F00E27156 /* AppDelegate_iPhone.m */; };
+		2860E329111B887F00E27156 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2860E327111B887F00E27156 /* MainWindow_iPhone.xib */; };
+		2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E32C111B888700E27156 /* AppDelegate_iPad.m */; };
+		2860E32F111B888700E27156 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2860E32D111B888700E27156 /* MainWindow_iPad.xib */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		CD00BF9512C304C8002DC3E9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CD00BF9412C304C8002DC3E9 /* MBProgressHUD.m */; };
+		CD437CC311CC6B58005BB704 /* DomainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD437CC111CC6B58005BB704 /* DomainViewController.m */; };
+		CD437CC411CC6B58005BB704 /* DomainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD437CC211CC6B58005BB704 /* DomainViewController.xib */; };
+		CD437CF511CC7AC0005BB704 /* DomainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD437C8711CC658B005BB704 /* DomainListViewController.m */; };
+		CD437D6511CCA4FF005BB704 /* MDNSAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CD437D6411CCA4FF005BB704 /* MDNSAPI.m */; };
+		CD437D7711CCA846005BB704 /* NSDateJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CD437D5F11CCA3AE005BB704 /* NSDateJSON.m */; };
+		CD4A92AB122A6792001C48B4 /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4A92AA122A6792001C48B4 /* TextFieldCell.m */; };
+		CD5288E1122A4BD500219E9A /* DomainRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5288DF122A4BD500219E9A /* DomainRecordViewController.m */; };
+		CD5288E2122A4BD500219E9A /* DomainRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD5288E0122A4BD500219E9A /* DomainRecordViewController.xib */; };
+		CDB7AA5B1227E540000F52CF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA581227E540000F52CF /* Icon.png */; };
+		CDB7AA5C1227E540000F52CF /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA591227E540000F52CF /* Icon-72.png */; };
+		CDB7AA5D1227E540000F52CF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA5A1227E540000F52CF /* Icon@2x.png */; };
+		CDB7AA641227E6D7000F52CF /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA601227E6D7000F52CF /* Default-Landscape~ipad.png */; };
+		CDB7AA651227E6D7000F52CF /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA611227E6D7000F52CF /* Default-Portrait~ipad.png */; };
+		CDB7AA661227E6D7000F52CF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA621227E6D7000F52CF /* Default.png */; };
+		CDB7AA671227E6D7000F52CF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB7AA631227E6D7000F52CF /* Default@2x.png */; };
+		CDC05DE712C3292400BE1BB9 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DCE12C3292400BE1BB9 /* CDataScanner.m */; };
+		CDC05DE812C3292400BE1BB9 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DD112C3292400BE1BB9 /* CFilteringJSONSerializer.m */; };
+		CDC05DE912C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DD312C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.m */; };
+		CDC05DEA12C3292400BE1BB9 /* CJSONSerializedData.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DD512C3292400BE1BB9 /* CJSONSerializedData.m */; };
+		CDC05DEB12C3292400BE1BB9 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DD812C3292400BE1BB9 /* CDataScanner_Extensions.m */; };
+		CDC05DEC12C3292400BE1BB9 /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DDA12C3292400BE1BB9 /* NSCharacterSet_Extensions.m */; };
+		CDC05DED12C3292400BE1BB9 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DDC12C3292400BE1BB9 /* NSDictionary_JSONExtensions.m */; };
+		CDC05DEE12C3292400BE1BB9 /* NSScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DDE12C3292400BE1BB9 /* NSScanner_Extensions.m */; };
+		CDC05DEF12C3292400BE1BB9 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DE112C3292400BE1BB9 /* CJSONDeserializer.m */; };
+		CDC05DF012C3292400BE1BB9 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DE312C3292400BE1BB9 /* CJSONScanner.m */; };
+		CDC05DF112C3292400BE1BB9 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC05DE512C3292400BE1BB9 /* CJSONSerializer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* MobileMDNS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileMDNS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2860E325111B887F00E27156 /* AppDelegate_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate_iPhone.h; sourceTree = "<group>"; };
+		2860E326111B887F00E27156 /* AppDelegate_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate_iPhone.m; sourceTree = "<group>"; };
+		2860E327111B887F00E27156 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		2860E32B111B888700E27156 /* AppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate_iPad.h; sourceTree = "<group>"; };
+		2860E32C111B888700E27156 /* AppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate_iPad.m; sourceTree = "<group>"; };
+		2860E32D111B888700E27156 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Shared/main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* MobileMDNS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileMDNS_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* MobileMDNS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MobileMDNS-Info.plist"; path = "../MobileMDNS-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		CD00BF9312C304C8002DC3E9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		CD00BF9412C304C8002DC3E9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		CD437C8611CC658B005BB704 /* DomainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainListViewController.h; sourceTree = "<group>"; };
+		CD437C8711CC658B005BB704 /* DomainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainListViewController.m; sourceTree = "<group>"; };
+		CD437CC011CC6B58005BB704 /* DomainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainViewController.h; sourceTree = "<group>"; };
+		CD437CC111CC6B58005BB704 /* DomainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainViewController.m; sourceTree = "<group>"; };
+		CD437CC211CC6B58005BB704 /* DomainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DomainViewController.xib; sourceTree = "<group>"; };
+		CD437D3411CCA359005BB704 /* NSDateJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateJSON.h; sourceTree = "<group>"; };
+		CD437D5F11CCA3AE005BB704 /* NSDateJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateJSON.m; sourceTree = "<group>"; };
+		CD437D6311CCA4FF005BB704 /* MDNSAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDNSAPI.h; sourceTree = "<group>"; };
+		CD437D6411CCA4FF005BB704 /* MDNSAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDNSAPI.m; sourceTree = "<group>"; };
+		CD437D6611CCA562005BB704 /* MDNSAPIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDNSAPIDelegate.h; sourceTree = "<group>"; };
+		CD4A92A9122A6792001C48B4 /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		CD4A92AA122A6792001C48B4 /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		CD4A92FB122A7032001C48B4 /* MDNSModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDNSModalDelegate.h; sourceTree = "<group>"; };
+		CD5288DE122A4BD500219E9A /* DomainRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainRecordViewController.h; sourceTree = "<group>"; };
+		CD5288DF122A4BD500219E9A /* DomainRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DomainRecordViewController.m; sourceTree = "<group>"; };
+		CD5288E0122A4BD500219E9A /* DomainRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DomainRecordViewController.xib; sourceTree = "<group>"; };
+		CDB7AA581227E540000F52CF /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		CDB7AA591227E540000F52CF /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		CDB7AA5A1227E540000F52CF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		CDB7AA601227E6D7000F52CF /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		CDB7AA611227E6D7000F52CF /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		CDB7AA621227E6D7000F52CF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CDB7AA631227E6D7000F52CF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		CDC05DCD12C3292400BE1BB9 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
+		CDC05DCE12C3292400BE1BB9 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
+		CDC05DD012C3292400BE1BB9 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
+		CDC05DD112C3292400BE1BB9 /* CFilteringJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFilteringJSONSerializer.m; sourceTree = "<group>"; };
+		CDC05DD212C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
+		CDC05DD312C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer_BlocksExtensions.m; sourceTree = "<group>"; };
+		CDC05DD412C3292400BE1BB9 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
+		CDC05DD512C3292400BE1BB9 /* CJSONSerializedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializedData.m; sourceTree = "<group>"; };
+		CDC05DD712C3292400BE1BB9 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
+		CDC05DD812C3292400BE1BB9 /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		CDC05DD912C3292400BE1BB9 /* NSCharacterSet_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCharacterSet_Extensions.h; sourceTree = "<group>"; };
+		CDC05DDA12C3292400BE1BB9 /* NSCharacterSet_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCharacterSet_Extensions.m; sourceTree = "<group>"; };
+		CDC05DDB12C3292400BE1BB9 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		CDC05DDC12C3292400BE1BB9 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		CDC05DDD12C3292400BE1BB9 /* NSScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSScanner_Extensions.h; sourceTree = "<group>"; };
+		CDC05DDE12C3292400BE1BB9 /* NSScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSScanner_Extensions.m; sourceTree = "<group>"; };
+		CDC05DE012C3292400BE1BB9 /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		CDC05DE112C3292400BE1BB9 /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
+		CDC05DE212C3292400BE1BB9 /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		CDC05DE312C3292400BE1BB9 /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
+		CDC05DE412C3292400BE1BB9 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		CDC05DE512C3292400BE1BB9 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
+		CDC05DE612C3292400BE1BB9 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* MobileMDNS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2860E324111B887F00E27156 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				2860E325111B887F00E27156 /* AppDelegate_iPhone.h */,
+				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
+				2860E327111B887F00E27156 /* MainWindow_iPhone.xib */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		2860E32A111B888700E27156 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				2860E32B111B888700E27156 /* AppDelegate_iPad.h */,
+				2860E32C111B888700E27156 /* AppDelegate_iPad.m */,
+				2860E32D111B888700E27156 /* MainWindow_iPad.xib */,
+				CD437CC011CC6B58005BB704 /* DomainViewController.h */,
+				CD437CC111CC6B58005BB704 /* DomainViewController.m */,
+				CD437CC211CC6B58005BB704 /* DomainViewController.xib */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		28EEBF621118D79A00187D67 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CDC05DCC12C3292400BE1BB9 /* Source */,
+				CD00BF9312C304C8002DC3E9 /* MBProgressHUD.h */,
+				CD00BF9412C304C8002DC3E9 /* MBProgressHUD.m */,
+				CD5288DE122A4BD500219E9A /* DomainRecordViewController.h */,
+				CD5288DF122A4BD500219E9A /* DomainRecordViewController.m */,
+				CD5288E0122A4BD500219E9A /* DomainRecordViewController.xib */,
+				CDB7AA601227E6D7000F52CF /* Default-Landscape~ipad.png */,
+				CDB7AA611227E6D7000F52CF /* Default-Portrait~ipad.png */,
+				CDB7AA621227E6D7000F52CF /* Default.png */,
+				CDB7AA631227E6D7000F52CF /* Default@2x.png */,
+				CDB7AA581227E540000F52CF /* Icon.png */,
+				CDB7AA591227E540000F52CF /* Icon-72.png */,
+				CDB7AA5A1227E540000F52CF /* Icon@2x.png */,
+				CD437D5F11CCA3AE005BB704 /* NSDateJSON.m */,
+				CD437D3411CCA359005BB704 /* NSDateJSON.h */,
+				8D1107310486CEB800E47090 /* MobileMDNS-Info.plist */,
+				CD437C8611CC658B005BB704 /* DomainListViewController.h */,
+				CD437C8711CC658B005BB704 /* DomainListViewController.m */,
+				CD437D6311CCA4FF005BB704 /* MDNSAPI.h */,
+				CD437D6411CCA4FF005BB704 /* MDNSAPI.m */,
+				CD437D6611CCA562005BB704 /* MDNSAPIDelegate.h */,
+				CD4A92A9122A6792001C48B4 /* TextFieldCell.h */,
+				CD4A92AA122A6792001C48B4 /* TextFieldCell.m */,
+				CD4A92FB122A7032001C48B4 /* MDNSModalDelegate.h */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				2860E32A111B888700E27156 /* iPad */,
+				2860E324111B887F00E27156 /* iPhone */,
+				28EEBF621118D79A00187D67 /* Shared */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* MobileMDNS_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDC05DCC12C3292400BE1BB9 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CDC05DCD12C3292400BE1BB9 /* CDataScanner.h */,
+				CDC05DCE12C3292400BE1BB9 /* CDataScanner.m */,
+				CDC05DCF12C3292400BE1BB9 /* Experimental */,
+				CDC05DD612C3292400BE1BB9 /* Extensions */,
+				CDC05DDF12C3292400BE1BB9 /* JSON */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		CDC05DCF12C3292400BE1BB9 /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				CDC05DD012C3292400BE1BB9 /* CFilteringJSONSerializer.h */,
+				CDC05DD112C3292400BE1BB9 /* CFilteringJSONSerializer.m */,
+				CDC05DD212C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.h */,
+				CDC05DD312C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.m */,
+				CDC05DD412C3292400BE1BB9 /* CJSONSerializedData.h */,
+				CDC05DD512C3292400BE1BB9 /* CJSONSerializedData.m */,
+			);
+			path = Experimental;
+			sourceTree = "<group>";
+		};
+		CDC05DD612C3292400BE1BB9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CDC05DD712C3292400BE1BB9 /* CDataScanner_Extensions.h */,
+				CDC05DD812C3292400BE1BB9 /* CDataScanner_Extensions.m */,
+				CDC05DD912C3292400BE1BB9 /* NSCharacterSet_Extensions.h */,
+				CDC05DDA12C3292400BE1BB9 /* NSCharacterSet_Extensions.m */,
+				CDC05DDB12C3292400BE1BB9 /* NSDictionary_JSONExtensions.h */,
+				CDC05DDC12C3292400BE1BB9 /* NSDictionary_JSONExtensions.m */,
+				CDC05DDD12C3292400BE1BB9 /* NSScanner_Extensions.h */,
+				CDC05DDE12C3292400BE1BB9 /* NSScanner_Extensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CDC05DDF12C3292400BE1BB9 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				CDC05DE012C3292400BE1BB9 /* CJSONDeserializer.h */,
+				CDC05DE112C3292400BE1BB9 /* CJSONDeserializer.m */,
+				CDC05DE212C3292400BE1BB9 /* CJSONScanner.h */,
+				CDC05DE312C3292400BE1BB9 /* CJSONScanner.m */,
+				CDC05DE412C3292400BE1BB9 /* CJSONSerializer.h */,
+				CDC05DE512C3292400BE1BB9 /* CJSONSerializer.m */,
+				CDC05DE612C3292400BE1BB9 /* JSONRepresentation.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* MobileMDNS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MobileMDNS" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MobileMDNS;
+			productName = MobileMDNS;
+			productReference = 1D6058910D05DD3D006BFB54 /* MobileMDNS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MobileMDNS" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* MobileMDNS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2860E329111B887F00E27156 /* MainWindow_iPhone.xib in Resources */,
+				2860E32F111B888700E27156 /* MainWindow_iPad.xib in Resources */,
+				CD437CC411CC6B58005BB704 /* DomainViewController.xib in Resources */,
+				CDB7AA5B1227E540000F52CF /* Icon.png in Resources */,
+				CDB7AA5C1227E540000F52CF /* Icon-72.png in Resources */,
+				CDB7AA5D1227E540000F52CF /* Icon@2x.png in Resources */,
+				CDB7AA641227E6D7000F52CF /* Default-Landscape~ipad.png in Resources */,
+				CDB7AA651227E6D7000F52CF /* Default-Portrait~ipad.png in Resources */,
+				CDB7AA661227E6D7000F52CF /* Default.png in Resources */,
+				CDB7AA671227E6D7000F52CF /* Default@2x.png in Resources */,
+				CD5288E2122A4BD500219E9A /* DomainRecordViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				2860E328111B887F00E27156 /* AppDelegate_iPhone.m in Sources */,
+				2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */,
+				CD437CC311CC6B58005BB704 /* DomainViewController.m in Sources */,
+				CD437CF511CC7AC0005BB704 /* DomainListViewController.m in Sources */,
+				CD437D7711CCA846005BB704 /* NSDateJSON.m in Sources */,
+				CD437D6511CCA4FF005BB704 /* MDNSAPI.m in Sources */,
+				CD5288E1122A4BD500219E9A /* DomainRecordViewController.m in Sources */,
+				CD4A92AB122A6792001C48B4 /* TextFieldCell.m in Sources */,
+				CD00BF9512C304C8002DC3E9 /* MBProgressHUD.m in Sources */,
+				CDC05DE712C3292400BE1BB9 /* CDataScanner.m in Sources */,
+				CDC05DE812C3292400BE1BB9 /* CFilteringJSONSerializer.m in Sources */,
+				CDC05DE912C3292400BE1BB9 /* CJSONDeserializer_BlocksExtensions.m in Sources */,
+				CDC05DEA12C3292400BE1BB9 /* CJSONSerializedData.m in Sources */,
+				CDC05DEB12C3292400BE1BB9 /* CDataScanner_Extensions.m in Sources */,
+				CDC05DEC12C3292400BE1BB9 /* NSCharacterSet_Extensions.m in Sources */,
+				CDC05DED12C3292400BE1BB9 /* NSDictionary_JSONExtensions.m in Sources */,
+				CDC05DEE12C3292400BE1BB9 /* NSScanner_Extensions.m in Sources */,
+				CDC05DEF12C3292400BE1BB9 /* CJSONDeserializer.m in Sources */,
+				CDC05DF012C3292400BE1BB9 /* CJSONScanner.m in Sources */,
+				CDC05DF112C3292400BE1BB9 /* CJSONSerializer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MobileMDNS_Prefix.pch;
+				INFOPLIST_FILE = "MobileMDNS-Info.plist";
+				PRODUCT_NAME = MobileMDNS;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MobileMDNS_Prefix.pch;
+				INFOPLIST_FILE = "MobileMDNS-Info.plist";
+				PRODUCT_NAME = MobileMDNS;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PREBINDING = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MobileMDNS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MobileMDNS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
