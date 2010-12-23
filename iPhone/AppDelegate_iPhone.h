@@ -3,7 +3,7 @@
 //  MobileMDNS
 //
 //  Created by Patrick Quinn-Graham on 10-06-19.
-//  Copyright Sharkey Media 2010. All rights reserved.
+//  Copyright Patrick Quinn-Graham 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
