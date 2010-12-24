@@ -26,7 +26,10 @@
 
 -initWithAPIKey:(NSString*)key;
 
--(void)fetchDomains;
+-(void)fetchDomains:(void (^)(NSArray*))callback;
+-(void)fetchDomain:(NSString*)domainID onComplete:(void (^)(NSDictionary*))callback;
+-(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback;
+
 -(void)fetchDomain:(NSString*)domainID;
 
 @end

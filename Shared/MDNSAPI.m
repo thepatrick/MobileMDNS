@@ -46,7 +46,6 @@
 		NSLog(@"no, really, stopNetworkActivity!");
 		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	});
-	[self performSelectorOnMainThread:@selector(stopNetworkActivityMain) withObject:nil waitUntilDone:YES];
 }
 
 -initWithAPIKey:(NSString*)key {
@@ -62,17 +61,17 @@
     [super dealloc];
 }
 
--(void)fetchDomains {
+-(void)fetchDomains:(void (^)(NSArray*))callback {
 	dispatch_async(queue, ^{
 		[MDNSAPI startNetworkActivity];
 		
 		NSDictionary *domains = [self apiGetToMethod:@"domain/all" withParams:@""];
-		
+
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if([[domains objectForKey:@"status"] isEqualToString:@"ok"]) {
-				[delegate mdnsapi:self didFetchDomains:[domains objectForKey:@"domains"]];
+				callback([domains objectForKey:@"domains"]);
 			} else {
-				[delegate mdnsapi:self didFetchDomains:nil];
+				callback(nil);
 			}
 		});
 				
@@ -80,9 +79,8 @@
 	});
 }
 
--(void)fetchDomain:(NSString*)domainID {
+-(void)fetchDomain:(NSString*)domainID onComplete:(void (^)(NSDictionary*))callback {
 	dispatch_async(queue, ^{
-		NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 		[MDNSAPI startNetworkActivity];
 		
 		NSDictionary *domain = [self apiGetToMethod:@"domain/get" withParams:[@"id=" stringByAppendingString:domainID]];
@@ -90,15 +88,21 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			NSLog(@"Done! %@", self->delegate);
 			if([[domain objectForKey:@"status"] isEqualToString:@"ok"]) {
-				[delegate mdnsapi:self didFetchDomain:domain];
+                callback(domain);
 			} else {
-				[delegate mdnsapi:self didFetchDomain:nil];
+                callback(nil);
 			}
 		});
 		
 		[MDNSAPI stopNetworkActivity];
-		[pool release];
 	});
+}
+
+
+-(void)fetchDomain:(NSString*)domainID {
+    [self fetchDomain:domainID onComplete:^(NSDictionary *domain){
+        [delegate mdnsapi:self didFetchDomain:domain];
+    }];
 }
 
 -(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback {

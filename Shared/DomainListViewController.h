@@ -12,7 +12,7 @@
 @class DomainViewController;
 @class MDNSAPI;
 
-@interface DomainListViewController : UITableViewController<MDNSAPIDelegate> {
+@interface DomainListViewController : UITableViewController {
 
 	DomainViewController *domainViewController;
 	NSArray *domains;

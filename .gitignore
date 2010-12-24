@@ -1,3 +1,6 @@
 Shared/MDNSKey.h
 MobileMDNS.xcodeproj/*.pbxuser
 build
+MobileMDNS.xcodeproj/*.mode2v3
+MobileMDNS.xcodeproj/*.perspectivev3
+MobileMDNS.xcodeproj/xcuserdata

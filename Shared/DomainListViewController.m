@@ -43,8 +43,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	api.delegate = self;
-	[api fetchDomains];
+	[api fetchDomains:^(NSArray *arrayOfDomains){
+		self.domains = arrayOfDomains;
+		[self.tableView reloadData];
+	}];
 }
 
 /*
@@ -182,19 +184,6 @@
 
 - (void)dealloc {
     [super dealloc];
-}
-
-#pragma mark -
-#pragma mark MDNSAPIDelegate
-
-- (void)mdnsapi:(MDNSAPI *)api didFetchDomains:(NSArray *)arrayOfDomains {
-	self.domains = arrayOfDomains;
-	[self.tableView reloadData];
-//	{
-//		fqdn = "pftqg.com";
-//		key = agdwYXRyaWNrcg8LEghEQ0RvbWFpbhi9Aww;
-//		version = 2009050901;
-//	}
 }
 
 @end
