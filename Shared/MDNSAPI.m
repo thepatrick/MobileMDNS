@@ -6,10 +6,10 @@
 //  Copyright 2010 Patrick Quinn-Graham. All rights reserved.
 //
 
-#import "MDNSAPIDelegate.h"
 #import "MDNSAPI.h"
 #import "CJSONDeserializer.h"
 #import "MDNSKey.h"
+#import "NSDictionaryURLEncoding.h"
 
 
 #define MDNSAPIRoot @"http://dns.m.ac.nz/dnsconfig/api/"
@@ -26,7 +26,7 @@
 
 @implementation MDNSAPI
 
-@synthesize delegate, apiKey;
+@synthesize apiKey;
 
 +api {
 	return [[[MDNSAPI alloc] initWithAPIKey:MDNS_API_KEY] autorelease];
@@ -86,7 +86,6 @@
 		NSDictionary *domain = [self apiGetToMethod:@"domain/get" withParams:[@"id=" stringByAppendingString:domainID]];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
-			NSLog(@"Done! %@", self->delegate);
 			if([[domain objectForKey:@"status"] isEqualToString:@"ok"]) {
                 callback(domain);
 			} else {
@@ -98,17 +97,11 @@
 	});
 }
 
-
--(void)fetchDomain:(NSString*)domainID {
-    [self fetchDomain:domainID onComplete:^(NSDictionary *domain){
-        [delegate mdnsapi:self didFetchDomain:domain];
-    }];
-}
-
 -(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback {
     dispatch_async(queue, ^{
-        [MDNSAPI startNetworkActivity];
-        NSDictionary *result = (NSDictionary*)[self apiPostToMethod:@"record/modify" withParams:@""];
+        [MDNSAPI startNetworkActivity];		NSString *params = [record urlEncoded];
+		NSLog(@"About to post %@", params);
+        NSDictionary *result = (NSDictionary*)[self apiPostToMethod:@"record/modify" withParams:params];
         if(!result || ![[result objectForKey:@"status"] isEqualToString:@"ok"]) {
             callback(NO, result ? [result objectForKey:@"err"] : @"UNKNOWN_ERROR");
         } else {
@@ -122,11 +115,22 @@
 
 -(id)apiGetToMethod:(NSString*)method withParams:(NSString*)params {
 	NSURL *url = [NSURL URLWithString:[MDNSAPIRoot stringByAppendingFormat:@"%@?api.key=%@&%@", method, self.apiKey, params]];
-	NSString *showsJSONData = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+	
+	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
+	[theRequest setTimeoutInterval:30];
+	
+	NSError *err; 
+	NSURLResponse *response;
+	
+	NSData *responseData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:&err];
+	
 	NSDictionary *dict = nil;
-	if(showsJSONData != nil) {
-        dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:[showsJSONData dataUsingEncoding:NSUTF8StringEncoding] error:nil];
-	} 
+	if(responseData != nil) {
+        dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:nil];
+	} else {
+		NSLog(@"Failed to get updates");
+	}
+	
 	return dict;	
 }
 

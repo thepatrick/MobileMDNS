@@ -11,7 +11,7 @@
 #import "MDNSModalDelegate.h"
 #import "MBProgressHUD.h"
 
-@interface DomainViewController : UIViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, MDNSAPIDelegate, UINavigationControllerDelegate, MDNSModalDelegate, MBProgressHUDDelegate> {
+@interface DomainViewController : UIViewController<UIPopoverControllerDelegate, UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, MDNSModalDelegate, MBProgressHUDDelegate> {
     
     UIPopoverController *popoverController;
     UIToolbar *toolbar;

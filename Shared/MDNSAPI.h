@@ -8,18 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MDNSAPIDelegate;
-
 @interface MDNSAPI : NSObject {
 
-	id<MDNSAPIDelegate> delegate;
 	NSString *apiKey;
 	
 	dispatch_queue_t queue;
 	
 }
 
-@property (nonatomic, assign) id<MDNSAPIDelegate> delegate;
 @property (nonatomic, copy) NSString *apiKey;
 
 +api;
@@ -29,7 +25,5 @@
 -(void)fetchDomains:(void (^)(NSArray*))callback;
 -(void)fetchDomain:(NSString*)domainID onComplete:(void (^)(NSDictionary*))callback;
 -(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback;
-
--(void)fetchDomain:(NSString*)domainID;
 
 @end

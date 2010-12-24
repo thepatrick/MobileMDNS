@@ -30,7 +30,6 @@
     sectionTitles = [[NSArray arrayWithObjects:@"Domain", @"A", @"AAAA", @"CNAME", @"MX", @"NS", @"SRV", @"TXT", nil] retain];
     
 	self.api = [MDNSAPI api];
-	self.api.delegate = self;
 }
 
 
@@ -71,8 +70,18 @@
 		[self.view addSubview:HUD];
 		[HUD show:YES];
 	}
-	
-	[api fetchDomain:[detailItem objectForKey:@"key"]];
+	[api fetchDomain:[detailItem objectForKey:@"key"] onComplete:^(NSDictionary* apiDomain) {
+		NSLog(@"Got domain! %@", apiDomain);
+		if([[[apiDomain objectForKey:@"domain"] objectForKey:@"id"] isEqualToString:[detailItem objectForKey:@"key"]]) {
+			self.domain = [apiDomain objectForKey:@"domain"];
+			self.records = [apiDomain objectForKey:@"records"];
+			loading = NO;
+			self.recordsByGrouping = [NSMutableDictionary dictionaryWithCapacity:[sectionTitles count]];
+			[self sortRecords];
+			[self.tableView reloadData];
+			[HUD hide:YES];
+		}
+	}];
 	[self.tableView reloadData];	
 }
 
@@ -212,19 +221,6 @@
 
 #pragma mark -
 #pragma mark MDNSAPI Delegate methods
-
--(void)mdnsapi:(MDNSAPI*)api didFetchDomain:(NSDictionary*)apiDomain {
-	NSLog(@"Got domain! %@", apiDomain);
-	if([[[apiDomain objectForKey:@"domain"] objectForKey:@"id"] isEqualToString:[detailItem objectForKey:@"key"]]) {
-		self.domain = [apiDomain objectForKey:@"domain"];
-		self.records = [apiDomain objectForKey:@"records"];
-		loading = NO;
-        self.recordsByGrouping = [NSMutableDictionary dictionaryWithCapacity:[sectionTitles count]];
-        [self sortRecords];
-		[self.tableView reloadData];
-		[HUD hide:YES];
-	}
-}
 
 -(void)sortRecords {
     for(NSDictionary *record in records) {
