@@ -19,8 +19,8 @@
 +(void)startNetworkActivity;
 +(void)stopNetworkActivity;
 
--(id)apiPostToMethod:(NSString*)method withParams:(NSString*)params;
--(id)apiGetToMethod:(NSString*)method withParams:(NSString*)params;
+-(id)apiPostToMethod:(NSString*)method withParams:(NSString*)params deserialize:(BOOL)deserialize;
+-(id)apiGetToMethod:(NSString*)method withParams:(NSString*)params deserialize:(BOOL)deserialize;
 
 @end
 
@@ -65,7 +65,7 @@
 	dispatch_async(queue, ^{
 		[MDNSAPI startNetworkActivity];
 		
-		NSDictionary *domains = [self apiGetToMethod:@"domain/all" withParams:@""];
+		NSDictionary *domains = [self apiGetToMethod:@"domain/all" withParams:@"" deserialize:YES];
 
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if([[domains objectForKey:@"status"] isEqualToString:@"ok"]) {
@@ -83,7 +83,7 @@
 	dispatch_async(queue, ^{
 		[MDNSAPI startNetworkActivity];
 		
-		NSDictionary *domain = [self apiGetToMethod:@"domain/get" withParams:[@"id=" stringByAppendingString:domainID]];
+		NSDictionary *domain = [self apiGetToMethod:@"domain/get" withParams:[@"id=" stringByAppendingString:domainID] deserialize:YES];
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if([[domain objectForKey:@"status"] isEqualToString:@"ok"]) {
@@ -97,11 +97,78 @@
 	});
 }
 
+-(void)createDomain:(NSDictionary*)domain onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"domain/create";
+	dispatch_async(queue, ^{
+        [MDNSAPI startNetworkActivity];		
+		NSString *params = [domain urlEncoded];
+		NSLog(@"About to post %@", params);
+        NSDictionary *result = (NSDictionary*)[self apiPostToMethod:path withParams:params deserialize:YES];
+        if(!result || ![[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            callback(NO, result ? [result objectForKey:@"err"] : @"UNKNOWN_ERROR");
+        } else {
+            callback(YES, [result objectForKey:@"domain"]); 
+        }
+    });
+}
+
+-(void)modifyDomainAdvanced:(NSDictionary*)domain onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"domain/modifyAdvanced";
+	// post (id, refresh, retry, expire, default_ttl), if fail err || domain	
+}
+
+-(void)destroyDomain:(NSString*)domainID onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"domain/destroy";
+	// post (id), if fail err || destroyed == domain key
+}
+
+
+-(void)publishDomain:(NSString*)domainID onComplete:(void (^)(BOOL,NSString*))callback {
+	dispatch_async(queue, ^{
+		[MDNSAPI startNetworkActivity];	
+		NSString *params = [NSString stringWithFormat:@"id=%@", [domainID stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		NSLog(@"About to post %@", params);
+        NSDictionary *result = (NSDictionary*)[self apiPostToMethod:@"domain/publish" withParams:params deserialize:YES];
+        if(!result || ![[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            callback(NO, result ? [result objectForKey:@"err"] : @"UNKNOWN_ERROR");
+        } else {
+            callback(YES, [result objectForKey:@"version"]); 
+        }
+		
+		// status = ok, then "version", else "err"
+		[MDNSAPI stopNetworkActivity];
+	});
+}
+
+-(void)zonefileForDomain:(NSString*)domainID onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"domain/zonefile";
+	// ?key=%@, domainID
+	// deserialize:NO
+}
+
+-(void)domainRecordTypes:(void (^)(BOOL, NSArray*))callback {
+	NSString *path = @"record/getTypes";
+	// no params, return type is an array
+}
+
+-(void)domainRecord:(NSString*)recordID onComplete:(void (^)(BOOL, NSDictionary*))callback {
+	NSString *path = @"record/get";
+	// ?id=%@, recordID
+	// return type is dictionary
+}
+
+-(void)createDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"record/create";
+	// post
+	// return type is dictionary as "record"
+}
+
 -(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback {
     dispatch_async(queue, ^{
-        [MDNSAPI startNetworkActivity];		NSString *params = [record urlEncoded];
+        [MDNSAPI startNetworkActivity];		
+		NSString *params = [record urlEncoded];
 		NSLog(@"About to post %@", params);
-        NSDictionary *result = (NSDictionary*)[self apiPostToMethod:@"record/modify" withParams:params];
+        NSDictionary *result = (NSDictionary*)[self apiPostToMethod:@"record/modify" withParams:params deserialize:YES];
         if(!result || ![[result objectForKey:@"status"] isEqualToString:@"ok"]) {
             callback(NO, result ? [result objectForKey:@"err"] : @"UNKNOWN_ERROR");
         } else {
@@ -110,10 +177,24 @@
     });
 }
 
+-(void)destroyDomainRecord:(NSString*)recordID onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"domain/destroy";
+	// post (id), if fail err || destroyed (= recordID)
+}
+
+-(void)createAuthKeyForDevice:(NSString*)deviceID andApplication:(NSString*)applicationID onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"key/create";
+	// get (device_id, application_name), if (error) error || key. 
+}
+
+-(void)verifyKey:(NSString*)key onComplete:(void (^)(BOOL, NSString*))callback {
+	NSString *path = @"key/auth";
+	// get (api.key), if error: BAD_KEY then error, if NOT_AUTHD_YET then auth_url, if ok then user
+}
 #pragma mark -
 #pragma mark API HTTP methods
 
--(id)apiGetToMethod:(NSString*)method withParams:(NSString*)params {
+-(id)apiGetToMethod:(NSString*)method withParams:(NSString*)params deserialize:(BOOL)deserialize {
 	NSURL *url = [NSURL URLWithString:[MDNSAPIRoot stringByAppendingFormat:@"%@?api.key=%@&%@", method, self.apiKey, params]];
 	
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
@@ -126,7 +207,7 @@
 	
 	NSDictionary *dict = nil;
 	if(responseData != nil) {
-        dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:nil];
+		dict = [[CJSONDeserializer deserializer] deserialize:responseData error:nil];
 	} else {
 		NSLog(@"Failed to get updates");
 	}
@@ -134,7 +215,7 @@
 	return dict;	
 }
 
--(id)apiPostToMethod:(NSString*)method withParams:(NSString*)params {
+-(id)apiPostToMethod:(NSString*)method withParams:(NSString*)params deserialize:(BOOL)deserialize {
 	NSURL *url = [NSURL URLWithString:[MDNSAPIRoot stringByAppendingFormat:@"%@?api.key=%@", method, self.apiKey]];
 	
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
@@ -149,9 +230,13 @@
 	
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:theRequest returningResponse:&response error:&err];
 
-	NSDictionary *dict = nil;
+	id dict = nil;
 	if(responseData != nil) {
-        dict = [[CJSONDeserializer deserializer] deserializeAsDictionary:responseData error:nil];
+		if(deserialize) {
+			dict = [[CJSONDeserializer deserializer] deserialize:responseData error:nil];
+		} else {
+			dict = [NSString stringWithUTF8String:[responseData bytes]];
+		}
 	} else {
 		NSLog(@"Failed to get updates");
 	}

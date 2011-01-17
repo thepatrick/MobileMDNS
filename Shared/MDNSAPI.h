@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+enum MDNSAPIReturnTypes {
+	MDNSAPIJSONDictionaryResponse = 0,
+	MDNSAPIJSONArrayResponse = 1,
+	MDNSAPITextResponse = 2
+};
+
 @interface MDNSAPI : NSObject {
 
 	NSString *apiKey;
@@ -25,5 +31,6 @@
 -(void)fetchDomains:(void (^)(NSArray*))callback;
 -(void)fetchDomain:(NSString*)domainID onComplete:(void (^)(NSDictionary*))callback;
 -(void)saveDomainRecord:(NSDictionary*)record onComplete:(void (^)(BOOL, NSString*))callback;
+
 
 @end

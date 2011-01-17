@@ -1,16 +1,15 @@
-    //
-//  DomainViewController.m
+//
+//  DomainViewControlleriPhone.m
 //  MobileMDNS
 //
-//  Created by Patrick Quinn-Graham on 10-06-19.
-//  Copyright 2010 Patrick Quinn-Graham. All rights reserved.
+//  Created by Patrick Quinn-Graham on 17/01/11.
+//  Copyright 2011 Sharkey Media. All rights reserved.
 //
 
-#import "DomainViewController.h"
+#import "DomainViewControlleriPhone.h"
 #import "DomainRecordViewController.h"
-#import "MDNSAPI.h"
 
-@interface DomainViewController()
+@interface DomainViewControlleriPhone()
 
 - (void)configureDomainCell:(UITableViewCell*)cell forRow:(NSInteger)row;
 - (void)configureRecordCell:(UITableViewCell*)cell forIndexPath:(NSIndexPath*)indexPath;
@@ -19,125 +18,77 @@
 - (void)sortRecords;
 @end
 
-@implementation DomainViewController
+@implementation DomainViewControlleriPhone
 
-@synthesize detailItem, tableView, toolbar,popoverController, api, domain, records, label, recordsByGrouping;
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    sectionTitles = [[NSArray arrayWithObjects:@"Domain", @"A", @"AAAA", @"CNAME", @"MX", @"NS", @"SRV", @"TXT", nil] retain];
-    
-	self.api = [MDNSAPI api];
-}
+@synthesize detailItem, api, domain, records, recordsByGrouping;
 
 
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-	self.popoverController = nil;
-    [sectionTitles release];
-    sectionTitles = nil;
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-#pragma mark -
-#pragma mark Managing the detail item
-
-- (void)setDetailItem:(id)newDetailItem {
-    if (detailItem != newDetailItem) {
-        [detailItem release];
-        detailItem = [newDetailItem retain];
-		NSLog(@"Did get detailItem %@", detailItem);
-		self.label.title = [detailItem objectForKey:@"fqdn"];
- 		self.domain = nil;
-		self.records = nil;
-		[self reloadData];
-   }
-    if (popoverController != nil) {
-        [popoverController dismissPopoverAnimated:YES];
-    }   
-}
-
-- (void)reloadData {
-	loading = YES;
-	if(!HUD) {
-		HUD = [[MBProgressHUD alloc] initWithView:self.view];
-		HUD.labelText = @"Loading...";
-		HUD.delegate = self;
-		[self.view addSubview:HUD];
-		[HUD show:YES];
-	}
-	[api fetchDomain:[detailItem objectForKey:@"key"] onComplete:^(NSDictionary* apiDomain) {
-		NSLog(@"Got domain! %@", apiDomain);
-		if([[[apiDomain objectForKey:@"domain"] objectForKey:@"id"] isEqualToString:[detailItem objectForKey:@"key"]]) {
-			self.domain = [apiDomain objectForKey:@"domain"];
-			self.records = [apiDomain objectForKey:@"records"];
-			loading = NO;
-			self.recordsByGrouping = [NSMutableDictionary dictionaryWithCapacity:[sectionTitles count]];
-			[self sortRecords];
-			[self.tableView reloadData];
-			[HUD hide:YES];
-		}
-	}];
-	[self.tableView reloadData];	
-}
-
-#pragma mark -
-#pragma mark Split view support
-
-- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc {
-    barButtonItem.title = @"Domains";
-    NSMutableArray *items = [[toolbar items] mutableCopy];
-    [items insertObject:barButtonItem atIndex:0];
-    [toolbar setItems:items animated:YES];
-    [items release];
-    self.popoverController = pc;
-}
-
-// Called when the view is shown again in the split view, invalidating the button and popover controller.
-- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
-    
-    NSMutableArray *items = [[toolbar items] mutableCopy];
-    [items removeObjectAtIndex:0];
-    [toolbar setItems:items animated:YES];
-    [items release];
-    self.popoverController = nil;
-}
-
-
-#pragma mark -
-#pragma mark Rotation Support
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Overriden to allow any orientation.
-    return YES;
-}
-
-#pragma mark -
-#pragma mark Memory management
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-
-- (void)dealloc {
-	[popoverController release];
-	[toolbar release];
+- (void)dealloc
+{
 	[detailItem release];
 	[records release];
 	[domain release];
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Table view datasource
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    sectionTitles = [[NSArray arrayWithObjects:@"Domain", @"A", @"AAAA", @"CNAME", @"MX", @"NS", @"SRV", @"TXT", nil] retain];
+    
+	self.api = [MDNSAPI api];
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidUnload
+{
+    [sectionTitles release];
+    sectionTitles = nil;
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Table view data source
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [sectionTitles objectAtIndex:section];
@@ -181,7 +132,7 @@
 	static NSString *CellIdentifierRecord = @"RecordCell";
 	NSString *CellIdentifier = (indexPath.section == 0 ? CellIdentifierDomain : CellIdentifierRecord);
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tv dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
@@ -198,25 +149,61 @@
 	return cell;
 }
 
-#pragma mark -
-#pragma mark Table view delegate
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *record = [[self.recordsByGrouping objectForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-
+    
     DomainRecordViewController *drvc = [DomainRecordViewController drvcForRecord:[[record mutableCopy] autorelease]];
 	
 	drvc.delegate = self;
-	
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drvc];
-	navController.modalPresentationStyle = UIModalPresentationFormSheet;
-	[self presentModalViewController:navController animated:YES];
+	[self.navigationController pushViewController:drvc animated:YES];
+//	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drvc];
+//	[self presentModalViewController:navController animated:YES];
 }
 
 - (void)dismissModal:(id)sender {
 	[self reloadData];
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark Managing the detail item
+
+- (void)setDetailItem:(id)newDetailItem {
+    if (detailItem != newDetailItem) {
+        [detailItem release];
+        detailItem = [newDetailItem retain];
+		NSLog(@"Did get detailItem %@", detailItem);
+		self.title = [detailItem objectForKey:@"fqdn"];
+ 		self.domain = nil;
+		self.records = nil;
+		[self reloadData];
+    } 
+}
+
+- (void)reloadData {
+	loading = YES;
+	if(!HUD) {
+		HUD = [[MBProgressHUD alloc] initWithView:self.view];
+		HUD.labelText = @"Loading...";
+		HUD.delegate = self;
+		[self.view addSubview:HUD];
+		[HUD show:YES];
+	}
+	[api fetchDomain:[detailItem objectForKey:@"key"] onComplete:^(NSDictionary* apiDomain) {
+		NSLog(@"Got domain! %@", apiDomain);
+		if([[[apiDomain objectForKey:@"domain"] objectForKey:@"id"] isEqualToString:[detailItem objectForKey:@"key"]]) {
+			self.domain = [apiDomain objectForKey:@"domain"];
+			self.records = [apiDomain objectForKey:@"records"];
+			loading = NO;
+			self.recordsByGrouping = [NSMutableDictionary dictionaryWithCapacity:[sectionTitles count]];
+			[self sortRecords];
+			[self.tableView reloadData];
+			[HUD hide:YES];
+		}
+	}];
+	[self.tableView reloadData];	
 }
 
 #pragma mark -
@@ -239,10 +226,6 @@
 
 -(IBAction)refreshDomain:(id)sender {
 	[self reloadData];
-}
-
--(IBAction)publishDomain:(id)sender {
-	//
 }
 
 #pragma mmark -

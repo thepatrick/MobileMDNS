@@ -9,6 +9,7 @@
 		#import "DomainViewController.h"
 #import "DomainListViewController.h"
 #import "MDNSAPI.h"
+#import "DomainViewControlleriPhone.h"
 
 
 @implementation DomainListViewController
@@ -156,7 +157,13 @@
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		domainViewController.detailItem  = [domains objectAtIndex:indexPath.row];
 	} else {
+        
 		NSLog(@"You're on an iPhone, and I don't support you yet. Sorry. :(");
+        DomainViewControlleriPhone *dvc = [[DomainViewControlleriPhone alloc] initWithNibName:@"DomainViewControlleriPhone" bundle:nil];
+        dvc.detailItem = [domains objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:dvc animated:YES];
+        [dvc release];
+        
 //		if(!self.domainViewController) {
 //			self.domainViewController = [[[DomainViewController alloc] initWithNibName:@"DomainViewController" bundle:nil] autorelease];
 //		}
